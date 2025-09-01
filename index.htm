@@ -10,16 +10,20 @@
     .cliente {
         width: 200px;
     }
-    .movdimientos li:nth-of-type(even) {
+    .movimientos li:nth-of-type(even) {
         background-color: antiquewhite;
     }
-    .movdimientos li:nth-of-type(odd) {
+    .movimientos li:nth-of-type(odd) {
         background-color: rgb(190, 235, 241);
+    }
+    .clienteSeleccionado {
+        background-color: coral;
     }
    </style>
    <script type="module" src="js/index.js"></script>
 </head>
 <body>
+    
     <header class="bg-black text-white p-2">
         <h1>Banco ViPo</h1>
         <div id="herramientas" class="text-end">
@@ -37,16 +41,45 @@
 
     </main>
 
-    <div id="clon" class="cliente shadow border border-1 border-dark-subtle">
+    <div id="clon" class="cliente shadow border border-1 border-dark-subtle rounded-2 p-2 d-none">
         <img src="fotos/persona1.png" alt="foto cliente" class="w-25">
         <div class="nombre fw-bold">Pepe</div>
         <div class="saldo text-end">300</div>
-        <ul class="movimientos">
-            <li class="d-flex justify-content-between"><span class="tipo">I</span><span class="importe">50</span></li>
-            <li class="d-flex justify-content-between"><span class="tipo">I</span><span class="importe">50</span></li>
-            <li class="d-flex justify-content-between"><span class="tipo">I</span><span class="importe">50</span></li>
+        <ul class="movimientos list-unstyled">
+            <li class="d-flex justify-content-between px-1"><span class="tipo">I</span><span class="importe">50</span></li>
+            <li class="d-flex justify-content-between px-1"><span class="tipo">I</span><span class="importe">50</span></li>
+            <li class="d-flex justify-content-between px-1"><span class="tipo">I</span><span class="importe">50</span></li>
         </ul>
     </div>
+    <dialog id="dialogoCliente" class="p-2">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" 
+            required minlength="2" class="form-control" autocomplete="off">
+        <label for="saldo">Saldo</label>
+        <input type="number" name="saldo" id="saldo" 
+            required min="1" class="form-control mb-3" autocomplete="off">
+        <div id="errores"></div>
+        <input type="button" id="guardar" name="guardar" value="Aceptar"
+            class="btn btn-primary mx-3">
+        <input type="button" id="cancelar" name="cancelar" value="Cancelar"
+            class="btn btn-secondary">
+    </dialog>
+    <dialog id="dialogoMensajes" class="p-2" >
+        <div class="mensaje"></div>
+         <input type="button" id="aceptarMensaje" name="aceptarMensaje" value="Aceptar"
+            class="btn btn-primary mx-3">
+    </dialog>
+
+    <dialog id="dialogoMovimiento" class="p-2">
+        <label for="saldo">Saldo</label>
+        <input type="number" name="importe" id="importe" 
+            required min="1" class="form-control mb-3" autocomplete="off">
+        <div id="erroresMovimiento"></div>
+        <input type="button" id="guardarMovimiento" name="guardarMovimiento" value="Aceptar"
+            class="btn btn-primary mx-3">
+        <input type="button" id="cancelarMovimiento" name="cancelarMovimiento" value="Cancelar"
+            class="btn btn-secondary">
+    </dialog>
 
 </body>
 </html>
