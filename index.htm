@@ -6,9 +6,17 @@
    <title>Banco ViPo</title>
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.umd.min.js" type="module"></script>
    <style>
     .cliente {
         width: 200px;
+        max-height: 200px;
+        overflow-y: auto;
+    }
+    .datosCliente {
+        position: sticky;
+        top:0;
+        background-color: aliceblue;
     }
     .movimientos li:nth-of-type(even) {
         background-color: antiquewhite;
@@ -18,6 +26,29 @@
     }
     .clienteSeleccionado {
         background-color: coral;
+    }
+    #grafico {
+        width: 500px !important;
+        height: 300px !important;
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        border: solid;
+    }
+
+    #dialogoGrafico {
+        width: 600px;
+        height: 400px;
+    }
+    #cerrar {
+        background-color: transparent;
+        border: none;
+        position: absolute;
+        right: 10px;
+        top: 10px;
     }
    </style>
    <script type="module" src="js/index.js"></script>
@@ -34,7 +65,8 @@
             <input type="button" id="ingresar" name="ingresar" 
                 value="ingresar" class="btn btn-outline-primary mx-3"> 
             <input type="button" id="retirar" name="retirar" 
-                value="retirar" class="btn btn-outline-danger mx-3">                 
+                value="retirar" class="btn btn-outline-danger mx-3">
+            <button id="verGrafica" class="btn btn-outline-warning"><i class="bi bi-bar-chart-fill"></i></button>                 
         </div>
     </header>
     <main id="clientes" class="d-flex flex-wrap gap-2 mt-3">
@@ -42,9 +74,11 @@
     </main>
 
     <div id="clon" class="cliente shadow border border-1 border-dark-subtle rounded-2 p-2 d-none">
-        <img src="fotos/persona1.png" alt="foto cliente" class="w-25">
-        <div class="nombre fw-bold">Pepe</div>
-        <div class="saldo text-end">300</div>
+        <div class="datosCliente">
+            <img src="fotos/persona1.png" alt="foto cliente" class="w-25">
+            <div class="nombre fw-bold">Pepe</div>
+            <div class="saldo text-end">300</div>
+        </div>
         <ul class="movimientos list-unstyled">
             <li class="d-flex justify-content-between px-1"><span class="tipo">I</span><span class="importe">50</span></li>
             <li class="d-flex justify-content-between px-1"><span class="tipo">I</span><span class="importe">50</span></li>
@@ -80,6 +114,9 @@
         <input type="button" id="cancelarMovimiento" name="cancelarMovimiento" value="Cancelar"
             class="btn btn-secondary">
     </dialog>
-
+    <dialog id="dialogoGrafico">
+        <canvas id="grafico"></canvas>
+        <button id="cerrar"><i class="bi bi-x-circle-fill"></i></button>
+    </dialog>
 </body>
 </html>
